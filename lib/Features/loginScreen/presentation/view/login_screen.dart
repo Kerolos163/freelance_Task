@@ -104,8 +104,11 @@ class _LogInScreenState extends State<LogInScreen> {
                                       phoneCode: "+20",
                                     ),
                                   );
-                                  if (mounted) {
-                                    onTapLogin(myProvider, context);
+                                  if (myProvider.state ==
+                                      LoginScreenState.success) {
+                                    if (mounted) {
+                                      onTapLogin(myProvider, context);
+                                    }
                                   }
                                 }
                               },
