@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:freelance_task/Features/HomeScreen/presntation/view/home.dart';
 import 'package:freelance_task/Features/loginScreen/presentation/view/login_screen.dart';
 import 'package:freelance_task/core/api_services/dio_helper/dio_helper.dart';
+import 'package:freelance_task/core/cash_services/cashe_helper.dart';
+import 'package:freelance_task/core/constant.dart';
 import 'package:freelance_task/core/utils/app_colors.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
+  await CasheHelper.init();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -25,7 +30,9 @@ class MyApp extends StatelessWidget {
           primaryColor: AppColors.primary,
           useMaterial3: true,
         ),
-        home: const LogInScreen(),
+        home: CasheHelper.getData(key: AppConstant.userToken) == null
+            ? const LogInScreen()
+            : const HomeScreen(),
       ),
     );
   }

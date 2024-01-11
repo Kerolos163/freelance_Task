@@ -58,21 +58,23 @@ class _LogInScreenState extends State<LogInScreen> {
                 const Spacer(),
                 Consumer<LogInProvider>(
                   builder: (context, myProvider, child) {
-                    return CustomButton(
-                      label: AppStrings.login,
-                      onPressed: () async {
-                        await myProvider.userLogin(
-                          logInModelParam: LogInModelParam(
-                            phone: "123456789554",
-                            password: "123456789",
-                            phoneCode: "+20",
-                          ),
-                        );
-                        if (mounted) {
-                          onTapLogin(myProvider, context);
-                        }
-                      },
-                    );
+                    return myProvider.state == LoginScreenState.loading
+                        ? const CircularProgressIndicator()
+                        : CustomButton(
+                            label: AppStrings.login,
+                            onPressed: () async {
+                              await myProvider.userLogin(
+                                logInModelParam: LogInModelParam(
+                                  phone: "123456789554",
+                                  password: "123456789",
+                                  phoneCode: "+20",
+                                ),
+                              );
+                              if (mounted) {
+                                onTapLogin(myProvider, context);
+                              }
+                            },
+                          );
                   },
                 )
               ],
@@ -86,7 +88,7 @@ class _LogInScreenState extends State<LogInScreen> {
   void onTapLogin(LogInProvider myProvider, BuildContext context) {
     if (myProvider.model!.result ?? false) {
       if (mounted) {
-        Navigator.of(context).push(MaterialPageRoute(
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => const HomeScreen(),
         ));
       }
