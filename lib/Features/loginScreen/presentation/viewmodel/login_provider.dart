@@ -6,23 +6,29 @@ import 'package:freelance_task/Features/loginScreen/data/Models/login_model_para
 import 'package:freelance_task/core/api_services/dio_helper/dio_helper.dart';
 import 'package:freelance_task/core/api_services/end_points.dart';
 
+enum LoginScreenState { initial, loading, success, error }
+
 class LogInProvider extends ChangeNotifier {
+  LoginScreenState state = LoginScreenState.initial;
   bool isVisiable = false;
   changeVisibility() {
     isVisiable = !isVisiable;
     notifyListeners();
   }
 
-  // String state = "Loading";
   LoginResponseModel? model;
+  String errorMessage = "";
   userLogin({required LogInModelParam logInModelParam}) async {
-    // state = "Loading";
+    state = LoginScreenState.loading;
     await DioHelper.postData(
             url: Endpoint.logIn, data: logInModelParam.toJson())
         .then((value) {
       model = LoginResponseModel.fromJson(value.data);
+      log(model.toString());
+      state = LoginScreenState.success;
     }).catchError((error) {
-      log(error.toString());
+      
+      state = LoginScreenState.error;
     });
     notifyListeners();
   }
