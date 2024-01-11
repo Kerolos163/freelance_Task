@@ -19,7 +19,6 @@ class LogInProvider extends ChangeNotifier {
   }
 
   LoginResponseModel? model;
-  String errorMessage = "";
   userLogin({required LogInModelParam logInModelParam}) async {
     state = LoginScreenState.loading;
     await DioHelper.postData(
