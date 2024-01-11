@@ -21,6 +21,7 @@ class LogInProvider extends ChangeNotifier {
   LoginResponseModel? model;
   userLogin({required LogInModelParam logInModelParam}) async {
     state = LoginScreenState.loading;
+    notifyListeners();
     await DioHelper.postData(
             url: Endpoint.logIn, data: logInModelParam.toJson())
         .then((value) {
