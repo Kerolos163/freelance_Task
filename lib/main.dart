@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:freelance_task/Features/loginScreen/presentation/view/login_screen.dart';
+import 'package:freelance_task/core/api_services/dio_helper/dio_helper.dart';
 import 'package:freelance_task/core/utils/app_colors.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  DioHelper.init();
   runApp(const MyApp());
 }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelance_task/Features/loginScreen/data/Models/login_model_param.dart';
 import 'package:freelance_task/Features/loginScreen/presentation/viewmodel/login_provider.dart';
 import 'package:freelance_task/core/utils/app_colors.dart';
 import 'package:freelance_task/core/utils/app_strings.dart';
@@ -46,8 +47,20 @@ class LogInScreen extends StatelessWidget {
                   },
                 ),
                 const Spacer(),
-                const CustomButton(
-                  label: AppStrings.login,
+                Consumer<LogInProvider>(
+                  builder: (context, myProvider, child) {
+                    return CustomButton(
+                      label: AppStrings.login,
+                      onPressed: () {
+                        myProvider.userLogin(
+                          logInModelParam: LogInModelParam(
+                              phone: "123456789554",
+                              password: "123456789",
+                              phoneCode: "+20"),
+                        );
+                      },
+                    );
+                  },
                 )
               ],
             ),
