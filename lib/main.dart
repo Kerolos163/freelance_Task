@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:freelance_task/Features/HomeScreen/presntation/view/home.dart';
+import 'package:freelance_task/Features/HomeScreen/presntation/viewmodel/home_provider.dart';
 import 'package:freelance_task/Features/loginScreen/presentation/view/login_screen.dart';
 import 'package:freelance_task/Features/loginScreen/presentation/viewmodel/login_provider.dart';
 import 'package:freelance_task/core/api_services/dio_helper/dio_helper.dart';
@@ -29,7 +30,10 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider<LogInProvider>(
             create: (context) => LogInProvider(),
-          )
+          ),
+          ChangeNotifierProvider<HomeProvider>(
+            create: (context) => HomeProvider()..getUser(),
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

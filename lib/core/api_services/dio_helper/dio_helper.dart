@@ -15,7 +15,7 @@ class DioHelper {
     dio.options.headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      'Authorization': token,
+      'Authorization': 'Bearer $token',
     };
     return await dio.get(
       url,
@@ -31,7 +31,7 @@ class DioHelper {
     dio.options.headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      'Authorization': token,
+      'Authorization': 'Bearer $token',
     };
     return await dio.post(
       url,
@@ -47,7 +47,7 @@ class DioHelper {
       String? token}) async {
     dio.options.headers = {
       'Content-Type': 'application/json',
-      'Authorization': token,
+      'Authorization': 'Bearer $token',
     };
     return await dio.put(
       url,
